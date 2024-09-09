@@ -35,9 +35,10 @@ def get_persona(id_persona):
 
 @app.route('/personas', methods = ["POST"])
 def create_persona():
-    nombre = request.form['nombre']
-    correo = request.form['correo']
-    fecha = request.form['fecha']
+    datos = request.get_json()
+    nombre = datos['nombre']
+    correo = datos['correo']
+    fecha = datos['fecha']
     try:
         sql = f"INSERT INTO personas (id,nombre, correo,fecha) VALUES (NULL,'{nombre}', '{correo}','{fecha}')"
         cursor.execute(sql)
